@@ -2,22 +2,55 @@
 layout: default
 ---
 
-<div class="home">
+<select id="filter-os">
+  <option value="for-ubuntu-16">Ubuntu 16.04</option>
+  <option value="for-ubuntu-14">Ubuntu 14.04</option>
+</select>
 
-  <h1 class="page-heading">Posts</h1>
+<select id="filter-server">
+  <option value="for-apache">Apache</option>
+</select>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+<main id="steps" class="post-list for-ubuntu-16 for-apache">
+  {% for id in site.data.index %}
+  <section class="step">
+    <header>
+      <h2>{{ site.data[id].title }}</h2>
+    </header>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
+    <ul>
+      {% for step in site.data[id].steps %}
+      <li class="{{ step.class }}">
+        <h3>{{ step.title }}</h3>
+
+        <div>
+          {{ step.code | markdownify }}
+        </div>
       </li>
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</main>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+<script type="text/javascript">
+  var filterOs = document.getElementById('filter-os');
+  var filterServer = document.getElementById('filter-server');
+  var steps = document.getElementById('steps');
 
-</div>
+  filterOs.addEventListener('change', function () {
+    steps.classList.remove('for-ubuntu-16', 'for-ubuntu-14');
+    steps.classList.add(this.value);
+  });
+
+  filterServer.addEventListener('change', function () {
+    steps.classList.remove('for-apache', 'for-nginx');
+    steps.classList.add(this.value);
+  });
+
+  Array.prototype.forEach.call(steps.querySelectorAll('h2'), function (element) {
+    element.addEventListener('click', function () {
+      this.parentNode.parentNode.classList.toggle('is-opened');
+    });
+  });
+</script>

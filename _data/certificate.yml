@@ -1,0 +1,32 @@
+title: Certificate authority
+
+steps:
+  - title: Install certbot-auto
+    class: is-ubuntu-14
+    code: |
+      ```sh
+      wget https://dl.eff.org/certbot-auto
+      chmod a+x certbot-auto
+      mv certbot-auto /usr/local/bin/
+      ```
+
+  - title: Install letsencrypt
+    class: is-ubuntu-16
+    code: |
+      ```sql
+      apt-get install letsencrypt
+      ```
+
+  - title: Create the certificate
+    class: is-ubuntu-14
+    code: |
+      ```sql
+      certbot-auto certonly --standalone --agree-tos -d example.com
+      ```
+
+  - title: Create the certificate
+    class: is-ubuntu-16
+    code: |
+      ```sql
+      letsencrypt certonly --standalone --agree-tos -d example.com
+      ```

@@ -1,0 +1,93 @@
+title: Getting started
+
+steps:
+  - title: Update & upgrade system
+    class:
+    code: |
+      ```sh
+      apt-get update
+      apt-get upgrade
+      ```
+
+  - title: Install basic packages
+    class:
+    code: |
+      ```sh
+      apt-get install language-pack-es-base
+      apt-get install git
+      apt-get install mysql-server
+      ```
+
+  - title: Install Apache and modules
+    class: is-ubuntu-16 is-apache
+    code: |
+      ```sh
+      apt-get install apache2
+      apt-get install libapache2-mod-php7.0
+      apt-get install libapache2-mpm-itk
+      ```
+
+  - title: Install Apache and modules
+    class: is-ubuntu-14 is-apache
+    code: |
+      ```sh
+      apt-get install apache2
+      apt-get install libapache2-mod-php5
+      apt-get install apache2-mpm-itk
+      ```
+
+  - title: Install PHP7 modules
+    class: is-ubuntu-16
+    code: |
+      ```sh
+      apt-get install php7.0-cli
+      apt-get install php7.0-curl
+      apt-get install php-imagick
+      ```
+
+  - title: Install PHP5 modules
+    class: is-ubuntu-14
+    code: |
+      ```sh
+      apt-get install php5-cli
+      apt-get install php5-imagick
+      apt-get install php5-curl
+      ```
+
+  - title: Disable SSH password authentication
+    class: is-optional
+    code: |
+      Edit `/etc/ssh/sshd_config`:
+
+      ```
+      PasswordAuthentication no
+      PubkeyAuthentication yes
+      ChallengeResponseAuthentication no
+      ```
+      ```sh
+      service ssh reload
+      ```
+
+  - title: Add Swap file
+    class: is-optional
+    code: |
+      (Don't do this in SSD servers if it's not strictly neccesary).
+
+      Create and use the 1GB file /swapfile
+
+      ```sh
+      fallocate -l 1G /swapfile
+      chmod 600 /swapfile
+      mkswap /swapfile
+      swapon /swapfile
+      echo "/swapfile none swap sw 0 0" >> /etc/fstab
+      sysctl vm.swappiness=10
+      sysctl vm.vfs_cache_pressure=50
+      ```
+
+      Edit the file `/etc/sysctl.conf` with the following values:
+
+      ```conf
+      vm.swappiness=10
+      vm.vfs_cache_pressure=50
+      ```
