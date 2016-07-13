@@ -54,7 +54,7 @@ code {
 	background: rgb(236, 236, 236);
 }
 pre {
-	color: white;
+	color: rgb(236, 236, 236);
 	background-color: #333333;
 	padding: 1rem;
 	overflow-x: auto;
@@ -86,9 +86,11 @@ pre > code {
 }
 .highlight .k {
 	font-weight: bold;
+	color: white;
 }
 .highlight .o {
 	font-weight: bold;
+	color: white;
 }
 .highlight .cm {
 	color: #998;

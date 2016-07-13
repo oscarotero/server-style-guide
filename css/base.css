@@ -45,7 +45,7 @@ code {
 }
 
 pre {
-    color: white;
+    color: var(--color-gray-light);
     background-color: var(--color-black);
     padding: 1rem;
     overflow-x: auto;
