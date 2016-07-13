@@ -1,0 +1,60 @@
+/**
+ * Reset some basic elements
+ */
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--color-gray);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    -o-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+}
+
+a {
+    color: var(--color-brand);
+    text-decoration: none;
+
+    &:visited {
+        color: color(var(--color-brand) shade(15%));
+    }
+
+    &:hover {
+        color: black;
+        text-decoration: underline;
+    }
+}
+
+pre,
+code {
+    font-size: 1rem;
+    line-height: 1.4;
+    border-radius: 3px;
+}
+
+code {
+    padding: 2px 5px;
+    background: var(--color-gray-light);
+}
+
+pre {
+    color: white;
+    background-color: var(--color-black);
+    padding: 1rem;
+    overflow-x: auto;
+    margin: .5rem 0;
+
+    > code {
+        border: 0;
+        padding-right: 0;
+        padding-left: 0;
+        background: none;
+    }
+}

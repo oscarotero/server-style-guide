@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+:root {
+    --color-brand:      #2a7ae2;
+    --color-gray:       #828282;
+    --color-gray-light: color(var(--color-gray) tint(85%));
+    --color-black: gray(20%);
+}
+
+@custom-media --to-narrow (max-width: 499px);
+@custom-media --from-narrow (min-width: 500px);
+@custom-media --to-medium (min-width: 649px);
+@custom-media --from-medium (min-width: 650px);
+
+@import "base.css";
+@import "syntax-highlighting.css";
+@import "page.css";

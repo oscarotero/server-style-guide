@@ -1,0 +1,228 @@
+body {
+    overflow-y: scroll;
+}
+
+.page-wrapper {
+    max-width: 55rem;
+    margin: 0 auto;
+    padding: 2rem 4vw;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+        color: var(--color-brand);
+        font-size: 12vw;
+        line-height: .8;
+
+        @media (--from-medium) {
+            font-size: 5rem;
+        }
+    }
+}
+
+.page-content {
+    counter-reset: sections;
+    margin-bottom: 2rem;
+}
+
+.page-filter {
+    margin-bottom: 2rem;
+
+    select {
+        appearance: none;
+        border: none;
+        background: var(--color-brand);
+        color: white;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background .3s;
+        font-family: inherit;
+
+        &:hover {
+            background-color: color(var(--color-brand) shade(20%));
+            text-decoration: underline;
+        }
+        &:focus {
+            text-decoration: none;
+        }
+    }
+}
+.page-footer {
+    margin-bottom: 2rem;
+    font-size: .8rem;
+
+    @media (--from-narrow) {
+        display: flex;
+    }
+}
+.page-footer-about {
+
+    @media (--to-narrow) {
+        text-align: center;
+    }
+    @media (--from-narrow) {
+        flex: 1 1 auto;
+        margin-right: 2rem;
+    }
+}
+.page-footer-social {
+    list-style: none;
+    padding: 0;
+    flex: 0 0 auto;
+
+    @media (--to-narrow) {
+        display: flex;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    @media (--from-medium) {
+        display: flex;
+    }
+
+    li {
+        margin: 0 0 2px 2px;
+    }
+
+    a {
+        display: block;
+        white-space: nowrap;
+        color: var(--color-gray);
+        font-weight: bold;
+        background: var(--color-gray-light);
+        padding: .5em 1em;
+        border-radius: 3px;
+    }
+}
+
+.icon {
+    > svg {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+
+        path {
+            fill: var(--color-gray);
+        }
+    }
+}
+
+
+/* Filters */
+
+.for-ubuntu-16 {
+    .is-ubuntu-14 {
+        display: none;
+    }
+}
+.for-ubuntu-14 {
+    .is-ubuntu-16 {
+        display: none;
+    }
+}
+.for-apache {
+    .is-nginx {
+        display: none;
+    }
+}
+.for-nginx {
+    .is-apache {
+        display: none;
+    }
+}
+
+.page-filter {
+    text-align: center;
+}
+
+.step-content {
+    display: none;
+}
+
+.step-feedback {
+    font-size: .8em;
+    color: color(var(--color-gray) tint(50%));
+    margin: .5em 0;
+
+    @media (--from-narrow) {
+        text-align: right;
+    }
+    
+    a {
+        color: inherit;
+        text-decoration: underline;
+        white-space: nowrap;
+
+        &:hover {
+            color: black;
+        }
+    }
+}
+
+.step {
+    ul {
+        list-style: none;
+        padding: 0 0 0 3.2rem;
+        margin: 2rem 0;
+        counter-reset: subsections;
+    }
+
+    li {
+        margin-bottom: 3rem;
+    }
+
+    h2 {
+        cursor: pointer;
+        background-color: var(--color-brand);
+        color: white;
+        padding: 1em;
+        margin: 0;
+        counter-increment: sections;
+        transition: background-color .3s;
+        border-bottom: solid 1px;
+
+        &::before {
+            content: counter(sections) ". ";
+        }
+
+        &:hover {
+            background-color: color(var(--color-brand) shade(20%));
+        }
+    }
+
+    h3 {
+        counter-increment: subsections;
+        position: relative;
+        color: var(--color-brand);
+        margin-bottom: 1em;
+
+        &::before {
+            content: counter(sections) "." counter(subsections);
+            position: absolute;
+            left: -3.2rem;
+            text-align: right;
+            display: block;
+            width: 2.6rem;
+            font-size: 1.2rem;
+        }
+    }
+
+    &.is-opened {
+        .step-content {
+            display: block;
+        }
+        h2 {
+            background-color: white;
+            color: var(--color-brand);
+
+            &:hover {
+                color: black;
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+	"files": [
+		{
+			"input": "css/styles.css",
+			"output": "css/styles.dist.css"
+		}
+	],
+	"support": {
+		"explorer": 11,
+		"edge": 13,
+		"firefox": 45,
+		"chrome": 49,
+		"safari": false,
+		"opera": false,
+		"android": 4.4,
+		"ios": 9
+	},
+	"plugins": [
+		"base64",
+		"bower-loader",
+		"calc",
+		"color",
+		"custom-media",
+		"custom-selector",
+		"extend",
+		"fixes",
+		"flex",
+		"font-variant",
+		"import",
+		"matches",
+		"media-queries",
+		"msfilter-background-alpha",
+		"msfilter-linear-gradient",
+		"msfilter-transform",
+		"nested-rules",
+		"npm-loader",
+		"prefixes",
+		"rem",
+		"variables",
+		"webkit-gradient"
+	],
+	"code": "normal",
+	"map": "file"
+}
