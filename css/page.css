@@ -10,7 +10,7 @@ body {
 
 .page-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 
     h1 {
         color: var(--color-brand);
@@ -142,6 +142,48 @@ body {
 
 .step-content {
     display: none;
+
+    li.is-optional {
+        h3 {
+            cursor: pointer;
+            background: var(--color-gray-light);
+            padding: .5em 1em .5em 0;
+            transition: color .3s;
+
+            &::after {
+                content: "[optional]";
+                font-weight: normal;
+                font-size: .8em;
+                color: var(--color-gray);
+                margin-left: .5em;
+            }
+
+            &::before {
+                background: var(--color-gray-light);
+                padding-top: .5em;
+                padding-bottom: .5em;
+            }
+
+            &:hover {
+                color: black;
+            }
+        }
+        > div {
+            display: none;
+        }
+        &.is-opened {
+            h3 {
+                background: none;
+
+                &::before {
+                    background: none;
+                }
+            }
+            > div {
+                display: block;
+            }
+        }
+    }
 }
 
 .step-feedback {
@@ -205,10 +247,12 @@ body {
             content: counter(sections) "." counter(subsections);
             position: absolute;
             left: -3.2rem;
+            top: 0;
             text-align: right;
             display: block;
-            width: 2.6rem;
-            font-size: 1.2rem;
+            width: 3.2rem;
+            padding-right: .6rem;
+            box-sizing: border-box;
         }
     }
 

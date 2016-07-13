@@ -280,7 +280,7 @@ body {
 }
 .page-header {
 	text-align: center;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 }
 .page-header h1 {
 	color: #2a7ae2;
@@ -398,6 +398,39 @@ body {
 .step-content {
 	display: none;
 }
+.step-content li.is-optional h3 {
+	cursor: pointer;
+	background: rgb(236, 236, 236);
+	padding: 0.5em 1em 0.5em 0;
+	transition: color 0.3s;
+}
+.step-content li.is-optional h3::after {
+	content: '[optional]';
+	font-weight: normal;
+	font-size: 0.8em;
+	color: #828282;
+	margin-left: 0.5em;
+}
+.step-content li.is-optional h3::before {
+	background: rgb(236, 236, 236);
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.step-content li.is-optional h3:hover {
+	color: black;
+}
+.step-content li.is-optional > div {
+	display: none;
+}
+.step-content li.is-optional.is-opened h3 {
+	background: none;
+}
+.step-content li.is-optional.is-opened h3::before {
+	background: none;
+}
+.step-content li.is-optional.is-opened > div {
+	display: block;
+}
 .step-feedback {
 	font-size: 0.8em;
 	color: rgb(193, 193, 193);
@@ -451,10 +484,12 @@ body {
 	content: counter(sections) '.' counter(subsections);
 	position: absolute;
 	left: -3.2rem;
+	top: 0;
 	text-align: right;
 	display: block;
-	width: 2.6rem;
-	font-size: 1.2rem;
+	width: 3.2rem;
+	padding-right: 0.6rem;
+	box-sizing: border-box;
 }
 .step.is-opened .step-content {
 	display: block;

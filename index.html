@@ -71,4 +71,12 @@ layout: default
       this.parentNode.parentNode.classList.toggle('is-opened');
     });
   });
+
+  Array.prototype.forEach.call(steps.querySelectorAll('.is-optional > h3'), function (element) {
+    element.addEventListener('click', function () {
+      this.parentNode.classList.toggle('is-opened');
+    });
+  });
 </script>
+
+<script type="text/javascript" src="//127.0.0.1:8081"></script>
