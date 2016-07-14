@@ -17,25 +17,18 @@ steps:
       apt-get install letsencrypt
       ```
 
-  - title: Stop the apache2 program
-    class: is-apache
+  - title: Create the certificate
+    class: is-ubuntu-14 is-apache
     code: |
-      Or any program already listening on TCP port 80.
-
       ```sh
       service apache2 stop
-      ```
-
-  - title: Create the certificate
-    class: is-ubuntu-14
-    code: |
-      ```sql
       certbot-auto certonly --standalone --agree-tos --renew-by-default -d example.com
       ```
 
   - title: Create the certificate
-    class: is-ubuntu-16
+    class: is-ubuntu-16 is-apache
     code: |
       ```sql
+      service apache2 stop
       letsencrypt certonly --standalone --agree-tos --renew-by-default -d example.com
       ```
