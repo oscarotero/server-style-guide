@@ -59,9 +59,10 @@ steps:
       </VirtualHost>
       ```
 
-  - title: Restart
+  - title: Activate the site
     class: is-apache
     code: |
       ```sh
+      ln -s /etc/apache2/sites-available/001-example.com.conf /etc/apache2/sites-enabled/001-example.com.conf
       service apache2 restart
       ```
