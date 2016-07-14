@@ -12,23 +12,26 @@ steps:
   - title: Configure the http => https redirection
     class: is-apache
     code: |
-      Edit the file `/etc/apache2/sites-available/000-default.conf`
+      Edit the file `/etc/apache2/sites-available/default.conf`
 
       ```ApacheConf
       ServerName localhost
 
       <VirtualHost *:80>
-        Redirect 301 / https://example.com/
-
         RewriteEngine on
         RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,QSA,R=permanent]
+      </VirtualHost>
+      
+      <VirtualHost *:443>
+	      RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
+	      RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
       </VirtualHost>
       ```
 
   - title: Configure the site
     class: is-apache
     code: |
-      Edit the file `/etc/apache2/sites-available/001-example.com.conf`
+      Edit the file `/etc/apache2/sites-available/example.com.conf`
 
       ```ApacheConf
       <VirtualHost *:443>
@@ -63,6 +66,6 @@ steps:
     class: is-apache
     code: |
       ```sh
-      ln -s /etc/apache2/sites-available/001-example.com.conf /etc/apache2/sites-enabled/001-example.com.conf
+      ln -s /etc/apache2/sites-available/example.com.conf /etc/apache2/sites-enabled/001-example.com.conf
       service apache2 restart
       ```
