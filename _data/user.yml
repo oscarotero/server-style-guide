@@ -27,3 +27,11 @@ steps:
       ```
 
       Insert the authorized keys in `.ssh/authorized_keys`
+
+  - title: Create the directories to web and logs
+    class:
+    code: |
+      ```sh
+      mkdir www
+      mkdir logs
+      ```
