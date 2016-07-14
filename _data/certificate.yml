@@ -21,7 +21,8 @@ steps:
     class: is-apache
     code: |
       Or any program already listening on TCP port 80.
-      ```sql
+
+      ```sh
       service apache2 stop
       ```
 
