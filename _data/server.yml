@@ -50,7 +50,7 @@ steps:
         </Directory>
         
         # User
-        AssignUserId example www-data
+        AssignUserId example example
         
         # SSL
         SSLCertificateFile /etc/letsencrypt/live/example.com/fullchain.pem
