@@ -23,8 +23,14 @@ steps:
       </VirtualHost>
 
       <VirtualHost *:443>
+        RewriteEngine on
         RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
         RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
+
+        # SSL
+        SSLEngine On
+        SSLCertificateFile /etc/letsencrypt/live/example.com/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
       </VirtualHost>
       ```
 
@@ -56,6 +62,7 @@ steps:
         AssignUserId example example
 
         # SSL
+        SSLEngine On
         SSLCertificateFile /etc/letsencrypt/live/example.com/fullchain.pem
         SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
       </VirtualHost>
