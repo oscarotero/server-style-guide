@@ -30,12 +30,12 @@ steps:
     class: is-ubuntu-14
     code: |
       ```sql
-      certbot-auto certonly --standalone --agree-tos -d example.com
+      certbot-auto certonly --standalone --agree-tos --renew-by-default -d example.com
       ```
 
   - title: Create the certificate
     class: is-ubuntu-16
     code: |
       ```sql
-      letsencrypt certonly --standalone --agree-tos -d example.com
+      letsencrypt certonly --standalone --agree-tos --renew-by-default -d example.com
       ```
