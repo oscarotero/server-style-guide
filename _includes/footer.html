@@ -6,9 +6,9 @@
   <ul class="page-footer-social">
     {% if site.github_username %}
     <li>
-      <a href="https://github.com/{{ site.github_username }}">
+      <a href="https://github.com/{{ site.github_username }}{{ site.baseurl }}">
         <span class="icon icon--github">{% include icon-github.svg %}</span>
-        <span class="username">{{ site.github_username }}</span>
+        <span class="username">Github</span>
       </a>
     </li>
     {% endif %}
@@ -17,7 +17,7 @@
     <li>
       <a href="https://twitter.com/{{ site.twitter_username }}">
         <span class="icon icon--twitter">{% include icon-twitter.svg %}</span>
-        <span class="username">{{ site.twitter_username }}</span>
+        <span class="username">By @{{ site.twitter_username }}</span>
       </a>
     </li>
     {% endif %}
