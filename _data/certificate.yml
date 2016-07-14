@@ -13,22 +13,26 @@ steps:
   - title: Install letsencrypt
     class: is-ubuntu-16
     code: |
-      ```sql
+      ```sh
       apt-get install letsencrypt
       ```
 
   - title: Create the certificate
     class: is-ubuntu-14 is-apache
     code: |
+      Note that we are creating the certificates to both `www.example.com` and `example.com`.
+
       ```sh
       service apache2 stop
-      certbot-auto certonly --standalone --agree-tos --renew-by-default -d example.com
+      certbot-auto certonly --standalone --agree-tos --renew-by-default -d example.com -d www.example.com
       ```
 
   - title: Create the certificate
     class: is-ubuntu-16 is-apache
     code: |
-      ```sql
+      Note that we are creating the certificates to both `www.example.com` and `example.com`.
+
+      ```sh
       service apache2 stop
-      letsencrypt certonly --standalone --agree-tos --renew-by-default -d example.com
+      letsencrypt certonly --standalone --agree-tos --renew-by-default -d example.com -d www.example.com
       ```
