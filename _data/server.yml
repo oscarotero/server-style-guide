@@ -21,10 +21,10 @@ steps:
         RewriteEngine on
         RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,QSA,R=permanent]
       </VirtualHost>
-      
+
       <VirtualHost *:443>
-	      RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
-	      RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
+        RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
+        RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
       </VirtualHost>
       ```
 
