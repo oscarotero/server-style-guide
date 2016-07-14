@@ -71,9 +71,7 @@ steps:
   - title: Add Swap file
     class: is-optional
     code: |
-      (Don't do this in SSD servers if it's not strictly neccesary).
-
-      Create and use the 1GB file /swapfile
+      Example with 1GB file saved as `/swapfile`, but that [depends of your needs](http://askubuntu.com/a/5933).
 
       ```sh
       fallocate -l 1G /swapfile
