@@ -68,6 +68,21 @@ steps:
       </VirtualHost>
       ```
 
+  - title: Enable Http/2 protocol
+    class: is-apache is-optional
+    code: |
+      ```sh
+      add-apt-repository -y ppa:ondrej/apache2
+      apt-get update
+      apt-get dist-upgrade
+      a2enmod http2
+      ```
+      To activate it, edit `001-example.com.conf` adding the following line in the virtualhost:
+
+      ```ApacheConf
+      Protocols h2 http/1.1
+      ```
+      
   - title: Activate the site
     class: is-apache
     code: |
