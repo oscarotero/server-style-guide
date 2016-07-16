@@ -24,10 +24,11 @@ steps:
       </VirtualHost>
 
       <VirtualHost *:443>
+        ServerName www.example.com
+
         # www.example.com => example.com
         RewriteEngine on
-        RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
-        RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
+        RewriteRule ^ https://example.com%{REQUEST_URI} [L,R=301]
 
         # SSL
         SSLEngine On
