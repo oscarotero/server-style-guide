@@ -1,5 +1,13 @@
-- start
-- user
-- database
-- certificate
-- server
+selector:
+  - name: Ubuntu 16.04 + PHP7 + Apache
+    value: for-ubuntu-16 for-apache
+
+  - name: Ubuntu 14.04 + PHP5 + Apache
+    value: for-ubuntu-14 for-apache
+
+sections:
+  - start
+  - user
+  - database
+  - certificate
+  - server

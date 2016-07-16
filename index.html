@@ -8,18 +8,15 @@ layout: default
   </header>
 
   <div class="page-filter">
-    <select id="filter-os">
-      <option value="for-ubuntu-16">Ubuntu 16.04</option>
-      <option value="for-ubuntu-14">Ubuntu 14.04</option>
-    </select>
-
-    <select id="filter-server">
-      <option value="for-apache">Apache</option>
+    <select id="filter">
+      {% for option in site.data.index.selector %}
+      <option value="{{ option.value }}">{{ option.name }}</option>
+      {% endfor %}
     </select>
   </div>
 
-  <main id="steps" class="page-content for-ubuntu-16 for-apache">
-    {% for id in site.data.index %}
+  <main id="steps" class="page-content {{ site.data.index.selector[0].value }}">
+    {% for id in site.data.index.sections %}
     <section class="step">
       <header>
         <h2>{{ site.data[id].title }}</h2>
@@ -52,18 +49,11 @@ layout: default
 </div>
 
 <script type="text/javascript">
-  var filterOs = document.getElementById('filter-os');
-  var filterServer = document.getElementById('filter-server');
+  var filter = document.getElementById('filter');
   var steps = document.getElementById('steps');
 
-  filterOs.addEventListener('change', function () {
-    steps.classList.remove('for-ubuntu-16', 'for-ubuntu-14');
-    steps.classList.add(this.value);
-  });
-
-  filterServer.addEventListener('change', function () {
-    steps.classList.remove('for-apache', 'for-nginx');
-    steps.classList.add(this.value);
+  filter.addEventListener('change', function () {
+    steps.className = 'page-content ' + this.value;
   });
 
   Array.prototype.forEach.call(steps.querySelectorAll('h2'), function (element) {

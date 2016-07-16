@@ -72,6 +72,7 @@ steps:
     class: is-apache
     code: |
       ```sh
+      ln -s /etc/apache2/sites-available/default.conf /etc/apache2/sites-enabled/000-default.conf
       ln -s /etc/apache2/sites-available/example.com.conf /etc/apache2/sites-enabled/001-example.com.conf
       service apache2 restart
       ```
