@@ -9,7 +9,7 @@ steps:
       a2enmod ssl
       ```
 
-  - title: Configure the http to https and www redirections
+  - title: Configure the default redirections
     class: is-apache
     code: |
       Edit the file `/etc/apache2/sites-available/default.conf`
@@ -18,11 +18,13 @@ steps:
       ServerName localhost
 
       <VirtualHost *:80>
+        # http => https
         RewriteEngine on
         RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,QSA,R=permanent]
       </VirtualHost>
 
       <VirtualHost *:443>
+        # www.example.com => example.com
         RewriteEngine on
         RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
         RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
