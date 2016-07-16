@@ -21,8 +21,6 @@ steps:
     code: |
       ```sh
       su - example
-      mkdir .ssh
-      chmod 700 .ssh
       ssh-keygen
       ```
 
