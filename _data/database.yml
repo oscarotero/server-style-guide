@@ -1,6 +1,13 @@
-title: Create the database
+title: Database
 
 steps:
+  - title: Install Mysql
+    class:
+    code: |
+      ```sh
+      apt-get install mysql-server
+      ```
+
   - title: Create the database
     class:
     code: |
