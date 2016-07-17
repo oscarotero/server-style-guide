@@ -15,7 +15,6 @@ steps:
       ```sh
       apt-get install language-pack-es-base
       apt-get install git
-      apt-get install mysql-server
       ```
 
   - title: Install Apache and modules
