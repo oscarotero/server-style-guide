@@ -60,7 +60,7 @@ steps:
       Add the following line:
 
       ```
-      50  04  01  *  *  sh /root/cert-renew.sh
+      50  04  01  *  *  /root/cert-renew.sh
       ```
 
   - title: Renew the certificate automatically
@@ -86,5 +86,5 @@ steps:
       Add the following line:
 
       ```
-      50  04  01  *  *  sh /root/cert-renew.sh
+      50  04  01  *  *  /root/cert-renew.sh
       ```
