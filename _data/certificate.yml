@@ -36,3 +36,55 @@ steps:
       service apache2 stop
       letsencrypt certonly --standalone --agree-tos --renew-by-default -d example.com -d www.example.com
       ```
+
+  - title: Renew the certificate automatically
+    class: is-optional is-apache is-ubuntu-16
+    code: |
+      Create the file `/root/cert-renew.sh`:
+
+      ```sh
+      #!/bin/sh
+
+      service apache2 stop
+      letsencrypt certonly --standalone --agree-tos --renew-by-default -d example.com -d www.example.com
+      service apache2 start
+      ```
+
+      Then, execute:
+
+      ```sh
+      chmod +x cert-renew.sh
+      crontab -e
+      ```
+
+      Add the following line:
+
+      ```
+      50  04  01  *  *  sh /root/cert-renew.sh
+      ```
+
+  - title: Renew the certificate automatically
+    class: is-optional is-apache is-ubuntu-14
+    code: |
+      Create the file `cert-renew.sh`:
+
+      ```sh
+      #!/bin/sh
+
+      service apache2 stop
+      certbot-auto certonly --standalone --agree-tos --renew-by-default -d example.com -d www.example.com
+      service apache2 start
+      ```
+
+      Then, execute:
+
+      ```sh
+      chmod +x cert-renew.sh
+      crontab -e
+      ```
+
+      Add the following line:
+
+      ```
+      50  04  01  *  *  sh /root/cert-renew.sh
+      ```
