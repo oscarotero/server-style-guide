@@ -49,22 +49,35 @@ layout: default
 </div>
 
 <script type="text/javascript">
-  var filter = document.getElementById('filter');
-  var steps = document.getElementById('steps');
+  (function(){
+    var filter = document.getElementById('filter');
+    var steps = document.getElementById('steps');
+    var domain = document.location.hash.substr(1);
 
-  filter.addEventListener('change', function () {
-    steps.className = 'page-content ' + this.value;
-  });
+    if (domain.match(/[\w-]+\.[\w]+/)) {
+      var user = domain.split('.')[0];
 
-  Array.prototype.forEach.call(steps.querySelectorAll('h2'), function (element) {
-    element.addEventListener('click', function () {
-      this.parentNode.parentNode.classList.toggle('is-opened');
+      Array.prototype.forEach.call(steps.querySelectorAll('code'), function (element) {
+        element.innerHTML = element.innerHTML
+          .replace(/example\.com/g, domain)
+          .replace(/example/g, user);
+      });
+    }
+
+    filter.addEventListener('change', function () {
+      steps.className = 'page-content ' + this.value;
     });
-  });
 
-  Array.prototype.forEach.call(steps.querySelectorAll('.is-optional > h3'), function (element) {
-    element.addEventListener('click', function () {
-      this.parentNode.classList.toggle('is-opened');
+    Array.prototype.forEach.call(steps.querySelectorAll('h2'), function (element) {
+      element.addEventListener('click', function () {
+        this.parentNode.parentNode.classList.toggle('is-opened');
+      });
     });
-  });
+
+    Array.prototype.forEach.call(steps.querySelectorAll('.is-optional > h3'), function (element) {
+      element.addEventListener('click', function () {
+        this.parentNode.classList.toggle('is-opened');
+      });
+    });
+  })();
 </script>
