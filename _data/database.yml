@@ -19,7 +19,7 @@ steps:
     class:
     code: |
       ```sql
-      CREATE USER 'example'@'localhost' IDENTIFIED BY 'example';
+      CREATE USER 'example'@'localhost' IDENTIFIED BY 'password';
       GRANT ALL PRIVILEGES ON example.* TO 'example'@'localhost';
       FLUSH PRIVILEGES;
       ```
