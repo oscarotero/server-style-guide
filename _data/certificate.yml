@@ -53,14 +53,16 @@ steps:
       Then, execute:
 
       ```sh
+      mkdir /root/logs
       chmod +x cert-renew.sh
       crontab -e
+    
       ```
 
       Add the following line:
 
       ```
-      50  04  01  *  *  /root/cert-renew.sh
+      50  04  01  *  *  /root/cert-renew.sh >> /root/logs/cert-renew.log
       ```
 
   - title: Renew the certificate automatically
@@ -79,6 +81,7 @@ steps:
       Then, execute:
 
       ```sh
+      mkdir /root/logs
       chmod +x cert-renew.sh
       crontab -e
       ```
@@ -86,5 +89,5 @@ steps:
       Add the following line:
 
       ```
-      50  04  01  *  *  /root/cert-renew.sh >> /var/log/cert-renew.log
+      50  04  01  *  *  /root/cert-renew.sh >> /root/logs/cert-renew.log
       ```
