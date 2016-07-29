@@ -56,7 +56,6 @@ steps:
       mkdir /root/logs
       chmod +x cert-renew.sh
       crontab -e
-    
       ```
 
       Add the following line:
