@@ -297,28 +297,58 @@ body {
 	margin-bottom: 2rem;
 }
 .page-filter {
-	margin-bottom: 2rem;
+	text-align: left;
+	max-width: 400px;
+	margin: 0 auto 2rem auto;
 }
-.page-filter select {
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-	border: none;
-	background: #2a7ae2;
-	color: white;
+.page-filter select,
+.page-filter button,
+.page-filter input[type = 'text'] {
+	border: solid 1px rgb(236, 236, 236);
+	background: white;
 	padding: 0.5rem 1rem;
 	font-size: 1rem;
 	border-radius: 3px;
-	cursor: pointer;
-	transition: background 0.3s;
 	font-family: inherit;
+	margin: 0 5px 5px 0;
+	box-sizing: border-box;
 }
-.page-filter select:hover {
+.page-filter select:hover,
+.page-filter select:focus,
+.page-filter button:hover,
+.page-filter button:focus,
+.page-filter input[type = 'text']:hover,
+.page-filter input[type = 'text']:focus {
+	border-color: #828282;
+}
+.page-filter select:not(:valid),
+.page-filter button:not(:valid),
+.page-filter input[type = 'text']:not(:valid) {
+	box-shadow: none;
+	border-color: red;
+}
+.page-filter select,
+.page-filter input[type = 'text'] {
+	width: 100%;
+}
+.page-filter button {
+	background: #2a7ae2;
+	color: white;
+	transition: background-color 0.3s, color 0.3s;
+	border: none;
+}
+.page-filter button:hover {
 	background-color: rgb(34, 98, 181);
-	text-decoration: underline;
 }
-.page-filter select:focus {
-	text-decoration: none;
+@media (min-width: 650px) {
+	.page-filter {
+		text-align: center;
+		max-width: none;
+	}
+	.page-filter select,
+	.page-filter input[type = 'text'] {
+		width: auto;
+	}
 }
 .page-footer {
 	margin-bottom: 2rem;
@@ -391,9 +421,6 @@ body {
 }
 .for-nginx .is-apache {
 	display: none;
-}
-.page-filter {
-	text-align: center;
 }
 .step-content {
 	display: none;

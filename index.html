@@ -7,17 +7,19 @@ layout: default
     <h1>{{ site.title }}</h1>
   </header>
 
-  <div class="page-filter">
-    <select id="filter">
+  <form class="page-filter" id="options">
+    <select id="filter" name="filter" title="Installation type">
       {% for option in site.data.index.selector %}
       <option value="{{ option.value }}">{{ option.name }}</option>
       {% endfor %}
     </select>
-  </div>
+    <input type="text" id="domain" name="domain" value="example.com" pattern="[\w-]+\.[\w]+" title="Domain used in the examples">
+    <button type="submit">Submit</button>
+  </form>
 
   <main id="steps" class="page-content {{ site.data.index.selector[0].value }}">
     {% for id in site.data.index.sections %}
-    <section class="step">
+    <section class="step" id="step-{{ id }}">
       <header>
         <h2>{{ site.data[id].title }}</h2>
       </header>
@@ -50,34 +52,75 @@ layout: default
 
 <script type="text/javascript">
   (function(){
-    var filter = document.getElementById('filter');
-    var steps = document.getElementById('steps');
-    var domain = document.location.hash.substr(1);
+    var steps = document.getElementById('steps'),
+        optionsForm = document.getElementById('options'),
+        domainInput = document.getElementById('domain'),
+        filterInput = document.getElementById('filter'),
+        query = document.location.href.split('?')[1],
+        hash = document.location.hash.substr(1),
+        domainValue,
+        filterValue;
 
-    if (domain.match(/[\w-]+\.[\w]+/)) {
-      var user = domain.split('.')[0];
+    if (query) {
+      query.split('&').forEach(function (value) {
+        var result = value.match(/^filter=(.*)/);
 
-      Array.prototype.forEach.call(steps.querySelectorAll('code'), function (element) {
-        element.innerHTML = element.innerHTML
-          .replace(/example\.com/g, domain)
-          .replace(/example/g, user);
+        if (result) {
+          filterValue = result[1].replace(/\+/g, ' ');
+        }
+
+        result = value.match(/^domain=([\w-]+\.[\w]+)/);
+
+        if (result) {
+          domainValue = result[1];
+        }
       });
     }
 
-    filter.addEventListener('change', function () {
-      steps.className = 'page-content ' + this.value;
+    //Replace the example.com by the custom domain
+    if (domainValue) {
+      domainInput.value = domainValue;
+
+      Array.prototype.forEach.call(steps.querySelectorAll('code'), function (element) {
+        element.innerHTML = element.innerHTML
+          .replace(/example\.com/g, domainValue)
+          .replace(/example/g, domainValue.split('.')[0]);
+      });
+    }
+
+    //Validate the domain before send the form
+    domainInput.addEventListener('keyup', function () {
+      if (domainInput.validity.patternMismatch) {
+        domainInput.setCustomValidity('This value is incorrect. Must be [name].[domain]');
+      } else {
+        domainInput.setCustomValidity('');
+      }
     });
 
+    //Apply the filters
+    if (filterValue) {
+      steps.className = 'page-content ' + filterValue;
+      filterInput.value = filterValue;
+    }
+
+    //Open/close the steps
     Array.prototype.forEach.call(steps.querySelectorAll('h2'), function (element) {
       element.addEventListener('click', function () {
-        this.parentNode.parentNode.classList.toggle('is-opened');
+        var section = this.parentNode.parentNode;
+        section.classList.toggle('is-opened');
+        history.replaceState({}, null, '#' + (section.classList.contains('is-opened') ? section.id : ''));
       });
     });
 
+    //Open/close the optional sub-steps
     Array.prototype.forEach.call(steps.querySelectorAll('.is-optional > h3'), function (element) {
       element.addEventListener('click', function () {
         this.parentNode.classList.toggle('is-opened');
       });
     });
+
+    if (hash) {
+      document.getElementById(hash).classList.toggle('is-opened');
+    }
   })();
 </script>

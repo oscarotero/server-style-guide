@@ -29,26 +29,54 @@ body {
 }
 
 .page-filter {
-    margin-bottom: 2rem;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
 
-    select {
-        appearance: none;
-        border: none;
-        background: var(--color-brand);
-        color: white;
+    select,
+    button,
+    input[type="text"] {
+        border: solid 1px var(--color-gray-light);
+        background: white;
         padding: .5rem 1rem;
         font-size: 1rem;
         border-radius: 3px;
-        cursor: pointer;
-        transition: background .3s;
         font-family: inherit;
+        margin: 0 5px 5px 0;
+        box-sizing: border-box;
+        
+        &:hover, &:focus {
+            border-color: var(--color-gray);
+        }
+        &:not(:valid) {
+            box-shadow: none;
+            border-color: red;
+        }
+    }
+
+    select,
+    input[type="text"] {
+        width: 100%;
+    }
+
+    button {
+        background: var(--color-brand);
+        color: white;
+        transition: background-color .3s, color .3s;
+        border: none;
 
         &:hover {
             background-color: color(var(--color-brand) shade(20%));
-            text-decoration: underline;
         }
-        &:focus {
-            text-decoration: none;
+    }
+
+    @media (min-width: 650px) {
+        text-align: center;
+        max-width: none;
+
+        select,
+        input[type="text"] {
+            width: auto;
         }
     }
 }
@@ -134,10 +162,6 @@ body {
     .is-apache {
         display: none;
     }
-}
-
-.page-filter {
-    text-align: center;
 }
 
 .step-content {
