@@ -5,9 +5,10 @@ steps:
     class: is-apache
     code: |
       ```sh
-      a2enmod rewrite
       a2enmod ssl
+      a2enmod rewrite autoindex deflate expires filter headers include mime rewrite setenvif
       ```
+      Note: The second line of modules are optional but recomended by [h5bp/server-configs-apache](https://github.com/h5bp/server-configs-apache)
 
   - title: Configure the default redirections
     class: is-apache
