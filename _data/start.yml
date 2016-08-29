@@ -15,6 +15,7 @@ steps:
       ```sh
       apt-get install language-pack-es-base
       apt-get install git
+      apt-get install curl
       ```
 
   - title: Install Apache and modules
