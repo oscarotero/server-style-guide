@@ -8,10 +8,10 @@
 # Site settings
 title: Server installation style guide
 email: oom@oscarotero.com
-description: > # this means to ignore newlines until "baseurl:"
-  This is a style guide to install and configure web servers easily. You can use it with DigitalOcean's servers or similar VPS. Feel free to contribute with whatever you want (comments, forks, stars, etc)
-baseurl: "/server-style-guide" # the subpath of your site, e.g. /blog
-url: "https://oscarotero.github.io" # the base hostname & protocol for your site
+description: >
+  This is a style guide to install and configure web servers easily. You can use it with any VPS with root access. Feel free to contribute with whatever you want (comments, forks, stars, etc)
+baseurl: "/server-style-guide"
+url: "https://oscarotero.github.io"
 twitter_username: misteroom
 github_username:  oscarotero
 
