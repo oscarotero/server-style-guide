@@ -39,32 +39,26 @@ steps:
       </VirtualHost>
       ```
 
-  - title: Configure the site
+  - title: Configure the default redirections
     class: is-apache is-ubuntu-16
     code: |
-      Edit the file `/etc/apache2/sites-available/example.com.conf`
+      Edit the file `/etc/apache2/sites-available/default.conf`
 
       ```ApacheConf
+      ServerName localhost
+
+      <VirtualHost *:80>
+        # http => https
+        RewriteEngine on
+        RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,QSA,R=permanent]
+      </VirtualHost>
+
       <VirtualHost *:443>
-        # Server name
-        ServerName example.com
-        ServerAdmin webmaster@localhost
+        ServerName www.example.com
 
-        # Document root
-        DocumentRoot /var/www/example.com/www
-
-        # Logs
-        ErrorLog /var/www/example.com/logs/apache.error
-        CustomLog /var/www/example.com/logs/apache.log combined
-
-        # Directory configuration
-        <Directory /var/www/example.com/www>
-          AllowOverride All
-          Require all granted
-        </Directory>
-        
-        # User
-        AssignUserId example example
+        # www.example.com => example.com
+        RewriteEngine on
+        RewriteRule ^ https://example.com%{REQUEST_URI} [L,R=301]
 
         # SSL
         SSLEngine On
