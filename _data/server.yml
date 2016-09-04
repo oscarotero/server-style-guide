@@ -106,6 +106,7 @@ steps:
         SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
         SSLCertificateChainFile /etc/letsencrypt/live/example.com/chain.pem
       </VirtualHost>
+      ```
 
   - title: Configure the site
     class: is-apache is-ubuntu-16
