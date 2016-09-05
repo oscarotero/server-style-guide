@@ -1,0 +1,30 @@
+{
+  "name": "d.js",
+  "main": "d.js",
+  "homepage": "https://github.com/oscarotero/d.js",
+  "authors": [
+    "oscarotero <oom@oscarotero.com>"
+  ],
+  "description": "DOM manipulation micro-library",
+  "keywords": [
+    "dom",
+    "events",
+    "css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "demo"
+  ],
+  "version": "1.4.0",
+  "_release": "1.4.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.4.0",
+    "commit": "134779818af87dd9b88d2c5f583ac4137d3f7a84"
+  },
+  "_source": "https://github.com/oscarotero/d.git",
+  "_target": "^1.4.0",
+  "_originalSource": "d.js",
+  "_direct": true
+}

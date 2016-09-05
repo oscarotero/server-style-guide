@@ -1,0 +1,20 @@
+{
+  "name": "d.js",
+  "main": "d.js",
+  "homepage": "https://github.com/oscarotero/d.js",
+  "authors": [
+    "oscarotero <oom@oscarotero.com>"
+  ],
+  "description": "DOM manipulation micro-library",
+  "main": "d.js",
+  "keywords": [
+    "dom",
+    "events",
+    "css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "demo"
+  ]
+}

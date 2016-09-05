@@ -50,13 +50,10 @@ layout: default
   {% include footer.html %}
 </div>
 
+<script type="text/javascript" src="bower_components/d.js/dist/d.js"></script>
 <script type="text/javascript">
   (function(){
-    var steps = document.getElementById('steps'),
-        optionsForm = document.getElementById('options'),
-        domainInput = document.getElementById('domain'),
-        filterInput = document.getElementById('filter'),
-        query = document.location.href.split('?')[1],
+    var query = document.location.href.split('?')[1],
         hash = document.location.hash.substr(1),
         domainValue,
         filterValue;
@@ -79,9 +76,9 @@ layout: default
 
     //Replace the example.com by the custom domain
     if (domainValue) {
-      domainInput.value = domainValue;
+      d.get('#domain').value = filterValue;
 
-      Array.prototype.forEach.call(steps.querySelectorAll('code'), function (element) {
+      d.getAll('#steps code').forEach(function (element) {
         element.innerHTML = element.innerHTML
           .replace(/example\.com/g, domainValue)
           .replace(/example/g, domainValue.split('.')[0]);
@@ -89,34 +86,30 @@ layout: default
     }
 
     //Validate the domain before send the form
-    domainInput.addEventListener('keyup', function () {
-      if (domainInput.validity.patternMismatch) {
-        domainInput.setCustomValidity('This value is incorrect. Must be [name].[domain]');
+    d.on('keyup', '#domainInput', function () {
+      if (this.validity.patternMismatch) {
+        this.setCustomValidity('This value is incorrect. Must be [name].[domain]');
       } else {
-        domainInput.setCustomValidity('');
+        this.setCustomValidity('');
       }
     });
 
     //Apply the filters
     if (filterValue) {
-      steps.className = 'page-content ' + filterValue;
-      filterInput.value = filterValue;
+      d.get('#steps').className = 'page-content ' + filterValue;
+      d.get('#filter').value = filterValue;
     }
 
     //Open/close the steps
-    Array.prototype.forEach.call(steps.querySelectorAll('h2'), function (element) {
-      element.addEventListener('click', function () {
-        var section = this.parentNode.parentNode;
-        section.classList.toggle('is-opened');
-        history.replaceState({}, null, '#' + (section.classList.contains('is-opened') ? section.id : ''));
-      });
+    d.on('click', '#steps h2', function () {
+      var section = this.parentNode.parentNode;
+      section.classList.toggle('is-opened');
+      history.replaceState({}, null, '#' + (section.classList.contains('is-opened') ? section.id : ''));
     });
 
     //Open/close the optional sub-steps
-    Array.prototype.forEach.call(steps.querySelectorAll('.is-optional > h3'), function (element) {
-      element.addEventListener('click', function () {
+    d.on('click', '#steps .is-optional > h3', function () {
         this.parentNode.classList.toggle('is-opened');
-      });
     });
 
     if (hash) {

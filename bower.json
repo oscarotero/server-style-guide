@@ -1,0 +1,14 @@
+{
+  "name": "server-style-guide",
+  "homepage": "https://github.com/oscarotero/server-style-guide",
+  "authors": [
+    "oscarotero <oom@oscarotero.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "d.js": "^1.4.0"
+  }
+}
