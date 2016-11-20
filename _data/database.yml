@@ -1,4 +1,4 @@
-title: Database
+title: Mysql database
 
 steps:
   - title: Install Mysql
@@ -6,6 +6,13 @@ steps:
     code: |
       ```sh
       apt-get install mysql-server
+      ```
+
+  - title: Install PHP driver
+    class: is-ubuntu-16
+    code: |
+      ```sh
+      apt-get install php7.0-mysql
       ```
 
   - title: Create the database
