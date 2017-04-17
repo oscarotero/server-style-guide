@@ -88,5 +88,5 @@ steps:
       Add the following line:
 
       ```
-      50  04  01  *  *  /root/cert-renew.sh >> /root/logs/cert-renew.log
+      50  04  01  *  *  /root/cert-renew.sh >> /root/logs/cert-renew.log 2>&1
       ```
