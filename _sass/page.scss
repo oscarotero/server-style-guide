@@ -17,9 +17,14 @@ body {
         font-size: 12vw;
         line-height: .8;
 
-        @media (--from-medium) {
+        @media (min-width: 650px) {
             font-size: 5rem;
         }
+    }
+
+    p {
+        margin-top: 1em;
+        font-size: 2rem;
     }
 }
 
@@ -66,7 +71,7 @@ body {
         border: none;
 
         &:hover {
-            background-color: color(var(--color-brand) shade(20%));
+            background-color: var(--color-brand-dark);
         }
     }
 
@@ -84,16 +89,16 @@ body {
     margin-bottom: 2rem;
     font-size: .8rem;
 
-    @media (--from-narrow) {
+    @media (min-width: 500px) {
         display: flex;
     }
 }
 .page-footer-about {
 
-    @media (--to-narrow) {
+    @media (max-width: 499px) {
         text-align: center;
     }
-    @media (--from-narrow) {
+    @media (min-width: 500px) {
         flex: 1 1 auto;
         margin-right: 2rem;
     }
@@ -103,12 +108,12 @@ body {
     padding: 0;
     flex: 0 0 auto;
 
-    @media (--to-narrow) {
+    @media (max-width: 499px) {
         display: flex;
         margin-top: 1rem;
         justify-content: center;
     }
-    @media (--from-medium) {
+    @media (min-width: 650px) {
         display: flex;
     }
 
@@ -140,29 +145,6 @@ body {
     }
 }
 
-
-/* Filters */
-
-.for-ubuntu-16 {
-    .is-ubuntu-14 {
-        display: none;
-    }
-}
-.for-ubuntu-14 {
-    .is-ubuntu-16 {
-        display: none;
-    }
-}
-.for-apache {
-    .is-nginx {
-        display: none;
-    }
-}
-.for-nginx {
-    .is-apache {
-        display: none;
-    }
-}
 
 .step-content {
     display: none;
@@ -212,10 +194,10 @@ body {
 
 .step-feedback {
     font-size: .8em;
-    color: color(var(--color-gray) tint(50%));
+    color: var(--color-gray-light);
     margin: .5em 0;
 
-    @media (--from-narrow) {
+    @media (min-width: 500px) {
         text-align: right;
     }
     
@@ -257,7 +239,7 @@ body {
         }
 
         &:hover {
-            background-color: color(var(--color-brand) shade(20%));
+            background-color: var(--color-brand-dark);
         }
     }
 

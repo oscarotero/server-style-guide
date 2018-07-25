@@ -2,7 +2,6 @@ title: Getting started
 
 steps:
   - title: Update & upgrade system
-    class:
     code: |
       ```sh
       apt-get update
@@ -10,7 +9,6 @@ steps:
       ```
 
   - title: Install basic packages
-    class:
     code: |
       ```sh
       apt-get install language-pack-es-base
@@ -19,40 +17,19 @@ steps:
       ```
 
   - title: Install Apache and modules
-    class: is-ubuntu-16 is-apache
     code: |
       ```sh
       apt-get install apache2
-      apt-get install libapache2-mod-php7.0
+      apt-get install libapache2-mod-php
       apt-get install libapache2-mpm-itk
       ```
 
-  - title: Install Apache and modules
-    class: is-ubuntu-14 is-apache
-    code: |
-      ```sh
-      apt-get install apache2
-      apt-get install libapache2-mod-php5
-      apt-get install apache2-mpm-itk
-      ```
-
   - title: Install PHP7 modules
-    class: is-ubuntu-16
     code: |
       ```sh
-      apt-get install php7.0-cli
-      apt-get install php7.0-curl
-      apt-get install php7.0-mbstring
+      apt-get install php-curl
+      apt-get install php-mbstring
       apt-get install php-imagick
-      ```
-
-  - title: Install PHP5 modules
-    class: is-ubuntu-14
-    code: |
-      ```sh
-      apt-get install php5-cli
-      apt-get install php5-imagick
-      apt-get install php5-curl
       ```
 
   - title: Disable SSH password authentication

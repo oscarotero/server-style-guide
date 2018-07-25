@@ -5,14 +5,10 @@ layout: default
 <div class="page-wrapper">
   <header class="page-header">
     <h1>{{ site.title }}</h1>
+    <p>{{ site.subtitle }}</p>
   </header>
 
   <form class="page-filter" id="options">
-    <select id="filter" name="filter" title="Installation type">
-      {% for option in site.data.index.selector %}
-      <option value="{{ option.value }}">{{ option.name }}</option>
-      {% endfor %}
-    </select>
     <input type="text" id="domain" name="domain" value="example.com" pattern="[\w-]+\.[\w]+" title="Domain used in the examples">
     <button type="submit">Submit</button>
   </form>
@@ -55,16 +51,11 @@ layout: default
   (function(){
     var query = document.location.href.split('?')[1],
         hash = document.location.hash.substr(1),
-        domainValue,
-        filterValue;
+        domainValue;
 
     if (query) {
       query.split('&').forEach(function (value) {
         var result = value.match(/^filter=(.*)/);
-
-        if (result) {
-          filterValue = result[1].replace(/\+/g, ' ');
-        }
 
         result = value.match(/^domain=([\w-]+\.[\w]+)/);
 
@@ -76,8 +67,6 @@ layout: default
 
     //Replace the example.com by the custom domain
     if (domainValue) {
-      d.get('#domain').value = filterValue;
-
       d.getAll('#steps code').forEach(function (element) {
         element.innerHTML = element.innerHTML
           .replace(/example\.com/g, domainValue)
@@ -93,12 +82,6 @@ layout: default
         this.setCustomValidity('');
       }
     });
-
-    //Apply the filters
-    if (filterValue) {
-      d.get('#steps').className = 'page-content ' + filterValue;
-      d.get('#filter').value = filterValue;
-    }
 
     //Open/close the steps
     d.on('click', '#steps h2', function () {

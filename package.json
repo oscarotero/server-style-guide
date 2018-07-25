@@ -1,0 +1,6 @@
+{
+  "name": "server-style-guide",
+  "scripts": {
+    "start": "bundle exec jekyll server --incremental"
+  }
+}

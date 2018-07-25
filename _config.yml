@@ -7,6 +7,7 @@
 
 # Site settings
 title: Server installation style guide
+subtitle: Ubuntu 18.04 + PHP7 + Apache
 email: oom@oscarotero.com
 description: >
   This is a style guide to install and configure web servers easily. You can use it with any VPS with root access. Feel free to contribute with whatever you want (comments, forks, stars, etc)
