@@ -1,3 +1,4 @@
+---
 layout: default
 
 config: Ubuntu 18.04 + PHP7 + Apache
@@ -239,3 +240,4 @@ sections:
           a2ensite example.com
           service apache2 restart
           ```
+---
