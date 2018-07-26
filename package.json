@@ -1,6 +1,7 @@
 {
   "name": "server-style-guide",
   "scripts": {
-    "start": "bundle exec jekyll server --incremental"
+    "start": "bundle exec jekyll server --incremental",
+    "prettier": "prettier _sass/*.scss scripts.js --write --single-quote --tab-width 4"
   }
 }

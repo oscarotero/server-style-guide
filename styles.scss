@@ -3,13 +3,11 @@
 
 @charset "utf-8";
 
-:root {
-    --color-brand:      #2a7ae2;
-    --color-brand-dark: rgb(34, 98, 181);
-    --color-gray:       #828282;
-    --color-gray-light: #ccc;
-    --color-black: #333;
-}
+$blue:       #2a7ae2;
+$blue-dark:  rgb(34, 98, 181);
+$gray:       #828282;
+$gray-light: #ccc;
+$black:      #333;
 
 @import "base";
 @import "syntax-highlighting";

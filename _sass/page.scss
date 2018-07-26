@@ -1,7 +1,3 @@
-body {
-    overflow-y: scroll;
-}
-
 .page-wrapper {
     max-width: 55rem;
     margin: 0 auto;
@@ -13,9 +9,9 @@ body {
     margin-bottom: 3rem;
 
     h1 {
-        color: var(--color-brand);
+        color: $blue;
         font-size: 12vw;
-        line-height: .8;
+        line-height: 0.8;
 
         @media (min-width: 650px) {
             font-size: 5rem;
@@ -40,18 +36,19 @@ body {
 
     select,
     button,
-    input[type="text"] {
-        border: solid 1px var(--color-gray-light);
+    input[type='text'] {
+        border: solid 1px $gray-light;
         background: white;
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         font-size: 1rem;
         border-radius: 3px;
         font-family: inherit;
         margin: 0 5px 5px 0;
         box-sizing: border-box;
-        
-        &:hover, &:focus {
-            border-color: var(--color-gray);
+
+        &:hover,
+        &:focus {
+            border-color: $gray;
         }
         &:not(:valid) {
             box-shadow: none;
@@ -60,18 +57,18 @@ body {
     }
 
     select,
-    input[type="text"] {
+    input[type='text'] {
         width: 100%;
     }
 
     button {
-        background: var(--color-brand);
+        background: $blue;
         color: white;
-        transition: background-color .3s, color .3s;
+        transition: background-color 0.3s, color 0.3s;
         border: none;
 
         &:hover {
-            background-color: var(--color-brand-dark);
+            background-color: $blue-dark;
         }
     }
 
@@ -80,21 +77,20 @@ body {
         max-width: none;
 
         select,
-        input[type="text"] {
+        input[type='text'] {
             width: auto;
         }
     }
 }
 .page-footer {
     margin-bottom: 2rem;
-    font-size: .8rem;
+    font-size: 0.8rem;
 
     @media (min-width: 500px) {
         display: flex;
     }
 }
 .page-footer-about {
-
     @media (max-width: 499px) {
         text-align: center;
     }
@@ -124,10 +120,10 @@ body {
     a {
         display: block;
         white-space: nowrap;
-        color: var(--color-gray);
+        color: $gray;
         font-weight: bold;
-        background: var(--color-gray-light);
-        padding: .5em 1em;
+        background: $gray-light;
+        padding: 0.5em 1em;
         border-radius: 3px;
     }
 }
@@ -140,11 +136,10 @@ body {
         vertical-align: middle;
 
         path {
-            fill: var(--color-gray);
+            fill: $gray;
         }
     }
 }
-
 
 .step-content {
     display: none;
@@ -152,22 +147,22 @@ body {
     li.is-optional {
         h3 {
             cursor: pointer;
-            background: var(--color-gray-light);
-            padding: .5em 1em .5em 0;
-            transition: color .3s;
+            background: $gray-light;
+            padding: 0.5em 1em 0.5em 0;
+            transition: color 0.3s;
 
             &::after {
-                content: "[optional]";
+                content: '[optional]';
                 font-weight: normal;
-                font-size: .8em;
-                color: var(--color-gray);
-                margin-left: .5em;
+                font-size: 0.8em;
+                color: $gray;
+                margin-left: 0.5em;
             }
 
             &::before {
-                background: var(--color-gray-light);
-                padding-top: .5em;
-                padding-bottom: .5em;
+                background: $gray-light;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
             }
 
             &:hover {
@@ -193,14 +188,14 @@ body {
 }
 
 .step-feedback {
-    font-size: .8em;
-    color: var(--color-gray-light);
-    margin: .5em 0;
+    font-size: 0.8em;
+    color: $gray-light;
+    margin: 0.5em 0;
 
     @media (min-width: 500px) {
         text-align: right;
     }
-    
+
     a {
         color: inherit;
         text-decoration: underline;
@@ -226,38 +221,38 @@ body {
 
     h2 {
         cursor: pointer;
-        background-color: var(--color-brand);
+        background-color: $blue;
         color: white;
         padding: 1em;
         margin: 0;
         counter-increment: sections;
-        transition: background-color .3s;
+        transition: background-color 0.3s;
         border-bottom: solid 1px;
 
         &::before {
-            content: counter(sections) ". ";
+            content: counter(sections) '. ';
         }
 
         &:hover {
-            background-color: var(--color-brand-dark);
+            background-color: $blue-dark;
         }
     }
 
     h3 {
         counter-increment: subsections;
         position: relative;
-        color: var(--color-brand);
+        color: $blue;
         margin-bottom: 1em;
 
         &::before {
-            content: counter(sections) "." counter(subsections);
+            content: counter(sections) '.' counter(subsections);
             position: absolute;
             left: -3.2rem;
             top: 0;
             text-align: right;
             display: block;
             width: 3.2rem;
-            padding-right: .6rem;
+            padding-right: 0.6rem;
             box-sizing: border-box;
         }
     }
@@ -268,7 +263,7 @@ body {
         }
         h2 {
             background-color: white;
-            color: var(--color-brand);
+            color: $blue;
 
             &:hover {
                 color: black;

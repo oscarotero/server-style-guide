@@ -48,59 +48,6 @@
 	  {% include footer.html %}
 	</div>
 
-	<script type="text/javascript" src="bower_components/d.js/dist/d.js"></script>
-	<script type="text/javascript">
-	  (function(){
-	    var query = document.location.href.split('?')[1],
-	        hash = document.location.hash.substr(1),
-	        domainValue;
-
-	    if (query) {
-	      query.split('&').forEach(function (value) {
-	        var result = value.match(/^filter=(.*)/);
-
-	        result = value.match(/^domain=([\w-]+\.[\w]+)/);
-
-	        if (result) {
-	          domainValue = result[1];
-	        }
-	      });
-	    }
-
-	    //Replace the example.com by the custom domain
-	    if (domainValue) {
-	      d.getAll('#steps code').forEach(function (element) {
-	        element.innerHTML = element.innerHTML
-	          .replace(/example\.com/g, domainValue)
-	          .replace(/example/g, domainValue.split('.')[0]);
-	      });
-	    }
-
-	    //Validate the domain before send the form
-	    d.on('keyup', '#domainInput', function () {
-	      if (this.validity.patternMismatch) {
-	        this.setCustomValidity('This value is incorrect. Must be [name].[domain]');
-	      } else {
-	        this.setCustomValidity('');
-	      }
-	    });
-
-	    //Open/close the steps
-	    d.on('click', '#steps h2', function () {
-	      var section = this.parentNode.parentNode;
-	      section.classList.toggle('is-opened');
-	      history.replaceState({}, null, '#' + (section.classList.contains('is-opened') ? section.id : ''));
-	    });
-
-	    //Open/close the optional sub-steps
-	    d.on('click', '#steps .is-optional > h3', function () {
-	        this.parentNode.classList.toggle('is-opened');
-	    });
-
-	    if (hash) {
-	      document.getElementById(hash).classList.toggle('is-opened');
-	    }
-	  })();
-	</script>
+	<script type="text/javascript" src="{{ 'scripts.js' | absolute_url }}" defer></script>
   </body>
 </html>
