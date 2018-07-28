@@ -1,7 +1,7 @@
 ---
 layout: default
 
-config: Ubuntu 18.04 + PHP7 + Apache
+config: Ubuntu 18.04 + Nginx + PHP7
 
 sections:
   - title: Getting started
@@ -13,28 +13,20 @@ sections:
           apt-get upgrade
           ```
 
-      - title: Install basic packages
+      - title: Add extra repositories
+        class: is-optional
         code: |
           ```sh
-          apt-get install language-pack-es-base
-          apt-get install git
-          apt-get install curl
+          add-apt-repository ppa:ondrej/php
+          add-apt-repository ppa:nginx/$nginx
           ```
+          This allows to install the latest versions of PHP and nginx
 
-      - title: Install Apache and modules
+      - title: Install nginx and PHP
         code: |
           ```sh
-          apt-get install apache2
-          apt-get install libapache2-mod-php
-          apt-get install libapache2-mpm-itk
-          ```
-
-      - title: Install PHP7 modules
-        code: |
-          ```sh
-          apt-get install php-curl
-          apt-get install php-mbstring
-          apt-get install php-imagick
+          apt-get install nginx
+          apt-get install php
           ```
 
       - title: Disable SSH password authentication
@@ -165,79 +157,14 @@ sections:
           ```
   - title: Server configuration
     steps:
-      - title: Activate apache modules
+      - title: Download basic nginx config
         code: |
           ```sh
-          a2enmod ssl http2
-          a2enmod rewrite autoindex deflate expires filter headers include mime setenvif
+          service nginx stop
+          cd /etc
+          mv nginx nginx-previous
+          git clone git@github.com:h5bp/server-configs-nginx.git nginx
+
           ```
-          Note: The second line of modules is optional but recomended if you use [h5bp/server-configs-apache](https://github.com/h5bp/server-configs-apache)
-
-      - title: Configure the default redirections
-        code: |
-          Edit the file `/etc/apache2/sites-available/default.conf`
-
-          ```ApacheConf
-          ServerName localhost
-
-          <VirtualHost *:80>
-            # http => https
-            RewriteEngine on
-            RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,QSA,R=permanent]
-          </VirtualHost>
-
-          <VirtualHost *:443>
-            ServerName www.example.com
-
-            # www.example.com => example.com
-            RewriteEngine on
-            RewriteRule ^ https://example.com%{REQUEST_URI} [L,R=301]
-
-            # SSL
-            SSLEngine On
-            SSLCertificateFile /etc/letsencrypt/live/example.com/fullchain.pem
-            SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
-          </VirtualHost>
-          ```
-
-      - title: Configure the site
-        code: |
-          Edit the file `/etc/apache2/sites-available/example.com.conf`
-
-          ```ApacheConf
-          <VirtualHost *:443>
-            # Server name
-            ServerName example.com
-            ServerAdmin webmaster@localhost
-
-            # Document root
-            DocumentRoot /var/www/example.com/www
-
-            # Logs
-            ErrorLog /var/www/example.com/logs/apache.error
-            CustomLog /var/www/example.com/logs/apache.log combined
-
-            # Directory configuration
-            <Directory /var/www/example.com/www>
-              AllowOverride All
-              Require all granted
-            </Directory>
-            
-            # User
-            AssignUserId example example
-
-            # SSL
-            SSLEngine On
-            SSLCertificateFile /etc/letsencrypt/live/example.com/fullchain.pem
-            SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
-          </VirtualHost>
-          ```
-
-      - title: Activate the site
-        code: |
-          ```sh
-          a2ensite default
-          a2ensite example.com
-          service apache2 restart
-          ```
+          Thanks to [h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx/)
 ---
