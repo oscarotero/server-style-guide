@@ -9,7 +9,8 @@
 title: Server installation style guide
 email: oom@oscarotero.com
 description: >
-  This is a style guide to install and configure web servers easily. You can use it with any VPS with root access. Feel free to contribute with whatever you want (comments, forks, stars, etc)
+  This is a style guide to install and configure web servers easily. Many thanks to [Lito](https://twitter.com/lito_ordes) for share his knowledge patiently.
+  You can use it with any VPS with root access. Feel free to contribute with whatever you want (comments, forks, stars, etc)
 baseurl: "/server-style-guide"
 url: "https://oscarotero.github.io"
 twitter_username: misteroom
