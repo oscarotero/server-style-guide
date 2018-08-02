@@ -107,6 +107,8 @@ sections:
           apt-get install php7.2-mysql
           ```
 
+          Note: you may want to connect to the database through a SSH tunnel. To do that, open the `/etc/mysql/mysql.conf.d/mysqld.cnf` file and add the options `skip-external-locking` and `skip-grant-tables`.
+
       - title: Create the database
         code: |
           ```sql
@@ -230,6 +232,13 @@ sections:
           include h5bp/location/cross-domain-fonts.conf;
           ```
 
+      - title: Enable the default config
+        code: |
+          ```sh
+          cd /etc/nginx/sites-enabled/
+          ln -s ../sites-available/default 000-default
+          ```
+
 
   - title: Domain configuration
     steps:
@@ -320,6 +329,14 @@ sections:
             include h5bp/full.conf;
           }
           ```
+
+      - title: Enable the domain config
+        code: |
+          ```sh
+          cd /etc/nginx/sites-enabled/
+          ln -s ../sites-available/example.com example.com
+          ```
+
       - title: Configure a alias to a subdirectory
         class: is-optional
         code: |
