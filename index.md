@@ -199,7 +199,7 @@ sections:
 
           Edit the file to enable php-pfm and configure the logs: 
 
-          ```conf
+          ```
           server {
             # Here the other config
 
