@@ -142,8 +142,6 @@
 }
 
 .step-content {
-    display: none;
-
     li.is-optional {
         h3 {
             cursor: pointer;
@@ -219,11 +217,13 @@
         margin-bottom: 3rem;
     }
 
-    h2 {
+    > summary {
+        font-size: 1.8rem;
+        font-weight: bold;
         cursor: pointer;
         background-color: $blue;
         color: white;
-        padding: 1em;
+        padding: .6em 1em;
         margin: 0;
         counter-increment: sections;
         transition: background-color 0.3s;
@@ -257,10 +257,46 @@
         }
     }
 
-    &.is-opened {
-        .step-content {
-            display: block;
+    ul summary {
+        counter-increment: subsections;
+        position: relative;
+        color: $blue;
+        margin-bottom: 1em;
+        cursor: pointer;
+        background: $gray-light;
+        padding: 0.5em 1em;
+        transition: color 0.3s;
+        font-weight: bold;
+
+        &::after {
+            content: '[optional]';
+            font-weight: normal;
+            font-size: 0.8em;
+            color: $gray;
+            margin-left: 0.5em;
         }
+
+        &::before {
+            background: $gray-light;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            content: counter(sections) '.' counter(subsections);
+            position: absolute;
+            left: -3.2rem;
+            top: 0;
+            text-align: right;
+            display: block;
+            width: 3.2rem;
+            padding-right: 0.6rem;
+            box-sizing: border-box;
+        }
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    &[open] {
         h2 {
             background-color: white;
             color: $blue;

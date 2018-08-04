@@ -1,29 +1,5 @@
 (function() {
-    let query = document.location.href.split('?')[1],
-        hash = document.location.hash.substr(1),
-        domainValue;
-
-    if (query) {
-        query.split('&').forEach(value => {
-            const result = value.match(/^domain=([\w-]+\.[\w]+)/);
-
-            if (result) {
-                domainValue = result[1];
-            }
-        });
-    }
-
-    //Replace the example.com by the custom domain
-    if (domainValue) {
-        document
-            .querySelectorAll('#steps code')
-            .forEach(
-                element =>
-                    (element.innerHTML = element.innerHTML
-                        .replace(/example\.com/g, domainValue)
-                        .replace(/example/g, domainValue.split('.')[0]))
-            );
-    }
+    replaceValues(document.location.search.substr(1).replace('domain=', ''));
 
     //Validate the domain before send the form
     document.getElementById('domain').addEventListener('keyup', event => {
@@ -36,28 +12,36 @@
         }
     });
 
-    //Open/close the steps
-    document.querySelectorAll('#steps h2').forEach(element => {
-        element.addEventListener('click', event => {
-            var section = event.currentTarget.parentNode.parentNode;
-            section.classList.toggle('is-opened');
-            history.replaceState(
-                {},
-                null,
-                '#' +
-                    (section.classList.contains('is-opened') ? section.id : '')
-            );
-        });
-    });
+    function replaceValues(value) {
+        const result = getUserAndDomain(value);
 
-    //Open/close the optional sub-steps
-    document.querySelectorAll('#steps .is-optional > h3').forEach(element => {
-        element.addEventListener('click', event => {
-            event.currentTarget.parentNode.classList.toggle('is-opened');
-        });
-    });
+        if (!result) {
+            return;
+        }
 
-    if (hash) {
-        document.getElementById(hash).classList.toggle('is-opened');
+        document.getElementById('domain').value = value;
+
+        document
+            .querySelectorAll('.step code')
+            .forEach(
+                element =>
+                    (element.innerHTML = element.innerHTML
+                        .replace(/myuser/g, result[0])
+                        .replace(/mydomain\.com/g, result[1])
+            ));
+    }
+
+    function getUserAndDomain(domain) {
+        const matches = domain.match(/(([\w-]+)\.)?(([\w-]+)\.[\w]+)/);
+
+        if (!matches) {
+            return;
+        }
+
+        if (matches[2]) {
+            return [matches[2], matches[0]];
+        }
+
+        return [matches[4], matches[0]];
     }
 })();

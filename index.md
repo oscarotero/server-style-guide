@@ -26,7 +26,7 @@ sections:
           ```
 
       - title: Disable SSH password authentication
-        class: is-optional
+        optional: true
         code: |
           Edit `/etc/ssh/sshd_config`:
 
@@ -40,7 +40,7 @@ sections:
           ```
 
       - title: Add Swap file
-        class: is-optional
+        optional: true
         code: |
           Example with 1GB file saved as `/swapfile`, but that [depends of your needs](http://askubuntu.com/a/5933).
 
@@ -117,13 +117,13 @@ sections:
       - title: Create the user
         code: |
           ```sh
-          adduser --home /var/www/example.com example
+          adduser --home /var/www/mydomain.com myuser
           ```
 
       - title: Generate the ssh keys
         code: |
           ```sh
-          su - example
+          su - myuser
           ssh-keygen
           ```
 
@@ -138,10 +138,10 @@ sections:
       - title: Assign the correct permissions to the directory
         code: |
           ```sh
-          exit # exit of user example
-          chmod 710 /var/www/example.com
-          chmod 770 /var/www/example.com/logs
-          chgrp www-data /var/www/example.com /var/www/example.com/logs
+          exit # exit of user
+          chmod 710 /var/www/mydomain.com
+          chmod 770 /var/www/mydomain.com/logs
+          chgrp www-data /var/www/mydomain.com /var/www/mydomain.com/logs
           ```
 
   - title: Site configuration
@@ -151,9 +151,9 @@ sections:
           Create also the user and configure the privileges
 
           ```sql
-          CREATE DATABASE `example` DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
-          CREATE USER 'example'@'localhost' IDENTIFIED BY 'password';
-          GRANT ALL PRIVILEGES ON `example`.* TO 'example'@'localhost';
+          CREATE DATABASE `myuser` DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
+          CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypassword';
+          GRANT ALL PRIVILEGES ON `myuser`.* TO 'myuser'@'localhost';
           FLUSH PRIVILEGES;
           ```
 
@@ -164,22 +164,22 @@ sections:
           ```sh
           cd /etc/php/7.2/fpm/pool.d/
           mv www.conf default # this only the first time
-          cp default example.conf
-          vi example.conf
+          cp default myuser.conf
+          vi myuser.conf
           ```
 
-          Edit the `example.conf` file with the following changes:
+          Edit the `myuser.conf` file with the following changes:
 
           ```conf
           ; pool name ('www' here)
-          [example]
+          [myuser]
 
-          user = example
-          group = example
+          user = myuser
+          group = myuser
 
           listen = /run/php/php7.2-fpm-$pool.sock
 
-          php_admin_value[error_log] = /var/www/example.com/logs/php.error
+          php_admin_value[error_log] = /var/www/mydomain.com/logs/php.error
           ```
 
           ```sh
@@ -190,16 +190,16 @@ sections:
         code: |
           ```sh
           cd /etc/nginx/sites-available
-          cp ssl.example.com example.com
-          vi example.com
+          cp ssl.example.com mydomain.com
+          vi mydomain.com
           ```
 
-          Edit the file replacing all example.com by your domain.
+          Edit the file replacing all mydomain.com by your domain.
           Enable php-fpm and configure the logs:
 
           ```conf
           server {
-            # Rest of the config
+            # Here the other config
 
             location / {
               index index.php index.html index.htm;
@@ -207,14 +207,14 @@ sections:
 
             location ~ \.php$ {
               fastcgi_split_path_info ^(.+\.php)(/.+)$;
-              fastcgi_pass unix:/var/run/php/php7.2-fpm-example.sock;
+              fastcgi_pass unix:/var/run/php/php7.2-fpm-myuser.sock;
               fastcgi_index index.php;
               fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
               include fastcgi_params;
             }
 
-            access_log /var/www/example.com/logs/nginx.log combined buffer=32k flush=60;
-            error_log  /var/www/example.com/logs/nginx.error;
+            access_log /var/www/mydomain.com/logs/nginx.log combined buffer=32k flush=60;
+            error_log  /var/www/mydomain.com/logs/nginx.error;
 
             include h5bp/full.conf;
           }
@@ -224,7 +224,7 @@ sections:
         code: |
           ```sh
           cd /etc/nginx/sites-enabled/
-          ln -s ../sites-available/example.com example.com
+          ln -s ../sites-available/mydomain.com mydomain.com
           ```
 
       - title: Create the certificate
