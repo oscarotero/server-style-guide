@@ -170,7 +170,7 @@ sections:
 
           Edit the `myuser.conf` file with the following changes:
 
-          ```conf
+          ```
           ; pool name ('www' here)
           [myuser]
 
@@ -191,11 +191,11 @@ sections:
           ```sh
           cd /etc/nginx/sites-available
           cp ssl.example.com mydomain.com
+          sed -i 's/example.com/mydomain.com/g' mydomain.com
           vi mydomain.com
           ```
 
-          Edit the file replacing all mydomain.com by your domain.
-          Enable php-fpm and configure the logs:
+          Edit the file to enable php-pfm and configure the logs: 
 
           ```conf
           server {
