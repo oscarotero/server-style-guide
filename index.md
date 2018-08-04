@@ -17,10 +17,12 @@ sections:
         code: |
           ```sh
           apt install language-pack-es-base
+          apt install unzip
           apt install nginx
           apt install mysql-server
           apt install php7.2-common php7.2-cli php7.2-fpm
-          apt install php7.2-curl php7.2-gd php-imagick php7.2-mysql
+          apt install php7.2-curl php7.2-gd php-imagick php7.2-mbstring php7.2-xml php7.2-mysql
+          apt install composer
           apt install certbot
           apt install python3-certbot-nginx
           ```
