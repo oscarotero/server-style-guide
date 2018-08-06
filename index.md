@@ -106,12 +106,23 @@ sections:
           include h5bp/directive-only/ssl.conf;
           include h5bp/directive-only/extra-security.conf;
           include h5bp/directive-only/x-ua-compatible.conf;
-          include h5bp/directive-only/cross-domain-insecure.conf;
           include h5bp/directive-only/ssl-stapling.conf;
           include h5bp/location/cache-busting.conf;
           include h5bp/location/expires.conf;
           include h5bp/location/protect-system-files.conf;
           include h5bp/location/cross-domain-fonts.conf;
+          ```
+
+          Open the file:
+
+          ```sh
+          vi h5bp/directive-only/ssl.conf;
+          ```
+
+          And uncomment the line containing the text:
+
+          ```
+          add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
           ```
 
   - title: Deploy user
@@ -203,8 +214,10 @@ sections:
           server {
             # Here the other config
 
+            index index.php index.html index.htm;
+
             location / {
-              index index.php index.html index.htm;
+              try_files $uri $uri/ /index.php;
             }
 
             location ~ \.php$ {
