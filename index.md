@@ -65,64 +65,19 @@ sections:
 
   - title: Server configuration
     steps:
-      - title: Download basic nginx config
+      - title: Download nginx snippets to use later
         code: |
           ```sh
           service nginx stop
-          cd /etc
-          mv nginx nginx-previous
-          git clone https://github.com/h5bp/server-configs-nginx.git nginx
-          cp nginx-previous/fastcgi* nginx/
+          cd /etc/nginx
+          git clone https://github.com/oscarotero/nginx-snippets.git snippets/nginx-snippets
           ```
-          Thanks to [h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx/)
 
-      - title: Edit some default configuration
+      - title: Set the default php config
         code: |
           ```sh
-          cd nginx
-          vi nginx.conf
-          ```
-
-          Make the following changes:
-
-          ```conf
-          user www-data www-data;
-
-          error_log  /var/log/nginx/error.log warn;
-          access_log /var/log/nginx/access.log main;
-          ```
-
-      - title: Load config not loaded by default
-        code: |
-          ```sh
-          vi h5bp/full.conf
-          ```
-          
-          Copy the following code:
-
-          ```conf
-          include h5bp/directive-only/no-transform.conf;
-          include h5bp/directive-only/cache-file-descriptors.conf;
-          include h5bp/directive-only/ssl.conf;
-          include h5bp/directive-only/extra-security.conf;
-          include h5bp/directive-only/x-ua-compatible.conf;
-          include h5bp/directive-only/ssl-stapling.conf;
-          include h5bp/location/cache-busting.conf;
-          include h5bp/location/expires.conf;
-          include h5bp/location/protect-system-files.conf;
-          include h5bp/location/cross-domain-fonts.conf;
-          ```
-
-          Open the file:
-
-          ```sh
-          vi h5bp/directive-only/ssl.conf;
-          ```
-
-          And uncomment the line containing the text:
-
-          ```
-          add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+          cd /etc/php/7.2/fpm/pool.d/
+          mv www.conf default
           ```
 
   - title: Deploy user
@@ -176,7 +131,6 @@ sections:
 
           ```sh
           cd /etc/php/7.2/fpm/pool.d/
-          mv www.conf default # this only the first time
           cp default myuser.conf
           vi myuser.conf
           ```
@@ -203,21 +157,64 @@ sections:
         code: |
           ```sh
           cd /etc/nginx/sites-available
-          cp ssl.example.com mydomain.com
-          sed -i 's/example.com/mydomain.com/g' mydomain.com
           vi mydomain.com
           ```
 
-          Edit the file to enable php-pfm and configure the logs: 
-
           ```
+          # http -> https
           server {
-            # Here the other config
+            listen [::]:80;
+            listen 80;
+
+            server_name mydomain.com www.mydomain.com;
+
+            return 301 https://$host$request_uri;
+          }
+
+          # www -> non-www
+          server {
+            listen [::]:443 ssl http2;
+            listen 443 ssl http2;
+
+            server_name www.mydomain.com;
+
+            return 301 https://$host$request_uri;
+          }
+
+          server {
+            listen [::]:443 ssl http2;
+            listen 443 ssl http2;
+
+            server_name mydomain.com;
+
+            root /var/www/mydomain.com/www;
+
+            charset utf-8;
 
             index index.php index.html index.htm;
 
             location / {
-              try_files $uri $uri/ /index.php;
+              include snippets/nginx-snippets/html-headers.conf;
+            }
+
+            # Media: images, icons, video, audio, HTC
+            location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|mp4|ogg|ogv|webm|htc)$ {
+              include snippets/nginx-snippets/media-headers.conf;
+            }
+
+            # Fonts
+            location ~* \.(?:ttf|ttc|otf|eot|woff|woff2)$ {
+              include snippets/nginx-snippets/fonts-headers.conf;
+            }
+
+            # CSS
+            location ~* \.css$ {
+              include snippets/nginx-snippets/css-headers.conf;
+            }
+
+            # Javascript
+            location ~* \.js$ {
+              include snippets/nginx-snippets/js-headers.conf;
             }
 
             location ~ \.php$ {
@@ -226,12 +223,11 @@ sections:
               fastcgi_index index.php;
               fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
               include fastcgi_params;
+              include snippets/nginx-snippets/html-headers.conf;
             }
 
             access_log /var/www/mydomain.com/logs/nginx.log combined buffer=32k flush=60;
             error_log  /var/www/mydomain.com/logs/nginx.error;
-
-            include h5bp/full.conf;
           }
           ```
 
