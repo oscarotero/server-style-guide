@@ -189,32 +189,30 @@ sections:
 
             root /var/www/mydomain.com/www;
 
-            charset utf-8;
-
-            index index.php index.html index.htm;
+            include snippets/nginx-snippets/common.conf;
 
             location / {
-              include snippets/nginx-snippets/html-headers.conf;
+              include snippets/nginx-snippets/html.conf;
             }
 
             # Media: images, icons, video, audio, HTC
             location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|mp4|ogg|ogv|webm|htc)$ {
-              include snippets/nginx-snippets/media-headers.conf;
+              include snippets/nginx-snippets/media.conf;
             }
 
             # Fonts
             location ~* \.(?:ttf|ttc|otf|eot|woff|woff2)$ {
-              include snippets/nginx-snippets/fonts-headers.conf;
+              include snippets/nginx-snippets/fonts.conf;
             }
 
             # CSS
             location ~* \.css$ {
-              include snippets/nginx-snippets/css-headers.conf;
+              include snippets/nginx-snippets/css.conf;
             }
 
             # Javascript
             location ~* \.js$ {
-              include snippets/nginx-snippets/js-headers.conf;
+              include snippets/nginx-snippets/js.conf;
             }
 
             location ~ \.php$ {
@@ -223,7 +221,7 @@ sections:
               fastcgi_index index.php;
               fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
               include fastcgi_params;
-              include snippets/nginx-snippets/html-headers.conf;
+              include snippets/nginx-snippets/html.conf;
             }
 
             access_log /var/www/mydomain.com/logs/nginx.log combined buffer=32k flush=60;
