@@ -211,6 +211,8 @@ sections:
 
             location / {
               include snippets/nginx-snippets/html.conf;
+
+              try_files $uri $uri/ /index.php?$query_string;
             }
 
             # Media and fonts
@@ -230,6 +232,8 @@ sections:
               fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
               include fastcgi_params;
               include snippets/nginx-snippets/html.conf;
+
+              try_files $uri $uri/ /index.php?$query_string;
             }
 
             access_log /var/www/mydomain.com/logs/nginx.log combined buffer=32k flush=60;
