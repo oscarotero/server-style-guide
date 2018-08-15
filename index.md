@@ -27,6 +27,12 @@ sections:
           apt install python3-certbot-nginx
           ```
 
+      - title: Configure the server time
+        code: |
+          ```sh
+          dpkg-reconfigure tzdata
+          ```
+
       - title: Disable SSH password authentication
         optional: true
         code: |
@@ -65,12 +71,24 @@ sections:
 
   - title: Server configuration
     steps:
-      - title: Download nginx snippets to use later
+      - title: Nginx snippets
         code: |
+          Download the nginx snippets
+
           ```sh
           service nginx stop
           cd /etc/nginx
           git clone https://github.com/oscarotero/nginx-snippets.git snippets/nginx-snippets
+          vi nginx.conf
+          ```
+
+          Edit nginx config:
+          ```conf
+          # Replace this:
+          include /etc/nginx/mime.types;
+
+          # By this
+          include snippets/nginx-snippets/http.conf;
           ```
 
       - title: Set the default php config
@@ -189,30 +207,20 @@ sections:
 
             root /var/www/mydomain.com/www;
 
-            include snippets/nginx-snippets/common.conf;
+            include snippets/nginx-snippets/server.conf;
 
             location / {
               include snippets/nginx-snippets/html.conf;
             }
 
-            # Media: images, icons, video, audio, HTC
-            location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|mp4|ogg|ogv|webm|htc)$ {
+            # Media and fonts
+            location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|mp4|ogg|ogv|webm|htc|ttf|ttc|otf|eot|woff|woff2)$ {
               include snippets/nginx-snippets/media.conf;
             }
 
-            # Fonts
-            location ~* \.(?:ttf|ttc|otf|eot|woff|woff2)$ {
-              include snippets/nginx-snippets/fonts.conf;
-            }
-
-            # CSS
-            location ~* \.css$ {
-              include snippets/nginx-snippets/css.conf;
-            }
-
-            # Javascript
-            location ~* \.js$ {
-              include snippets/nginx-snippets/js.conf;
+            # Assets: css, javascript, etc
+            location ~* \.(?:css|js|webmanifest)$ {
+              include snippets/nginx-snippets/assets.conf;
             }
 
             location ~ \.php$ {
